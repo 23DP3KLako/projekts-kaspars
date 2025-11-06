@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="lv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>Māju pārdošana</title>
+</head>
+
+<body>
+    <!-- Navigācijas izvēlne -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Māju Pārdošana</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Sākums</a></li>
+                        <li><a href="#about">Par mums</a></li>
+                        <li><a href="#properties">Māju piedāvājumi</a></li>
+                        <li><a href="#contact">Kontakti</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Galvenā satura sadaļa -->
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Atrodiet savu sapņu māju</h1>
+                <p>Mēs palīdzam atrast ideālo māju jūsu ģimenei. Pārbaudiet mūsu aktuālos piedāvājumus!</p>
+                <button class="card-button" id="createCardBtn" style="margin-top: 1.5rem;">Izveidot jaunu kartiņu</button>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Meklēšanas sadaļa -->
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Meklēt mājas pēc nosaukuma vai apraksta...">
+                </div>
+            </section>
+
+            <!-- Kontaktu forma -->
+            <section class="contact-section" id="contact">
+                <h2>Sazināties ar mums</h2>
+                <form class="contact-form" id="contactForm">
+                    <div class="success-message" id="successMessage">
+                        Ziņojums veiksmīgi nosūtīts! Mēs ar jums sazināsimies drīz.
+                    </div>
+
+                    <div class="form-group" id="nameGroup">
+                        <label for="name">Vārds *</label>
+                        <input type="text" id="name" name="name">
+                        <div class="error-message" id="nameError">Lūdzu ievadiet savu vārdu</div>
+                    </div>
+
+                    <div class="form-group" id="emailGroup">
+                        <label for="email">E-pasts *</label>
+                        <input type="email" id="email" name="email">
+                        <div class="error-message" id="emailError">Lūdzu ievadiet derīgu e-pasta adresi</div>
+                    </div>
+
+                    <div class="form-group" id="messageGroup">
+                        <label for="message">Ziņojums *</label>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                        <div class="error-message" id="messageError">Lūdzu ievadiet ziņojumu</div>
+                    </div>
+
+                    <button type="submit" class="card-button">Nosūtīt ziņojumu</button>
+                </form>
+            </section>
+
+            <section class="content">
+                <div class="main-content">
+                    <h2>Kāpēc izvēlēties mūsu pakalpojumus?</h2>
+                    <p>Mēs esam vadošā nekustamo īpašumu aģentūra reģionā ar vairāk nekā 15 gadu pieredzi. Mūsu komanda palīdzēs jums atrast ideālo māju, kas atbilst jūsu vajadzībām un budžetam.</p>
+
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Mūsdienu māja">
+
+                    <h2>Mūsu pakalpojumi</h2>
+                    <p>Mēs piedāvājam pilnu pakalpojumu klāstu māju pārdošanai un iegādei, tostarp nekustamo īpašumu vērtēšanu, juridiskos pakalpojumus un finanšu konsultācijas.</p>
+                </div>
+
+                <aside>
+                    <h3>Populāri raksti</h3>
+                    <ul>
+                        <li><a href="#">Kā sagatavot māju pārdošanai</a></li>
+                        <li><a href="#">Top 5 kļūdas, ko izvairīties, pērkot māju</a></li>
+                        <li><a href="#">Hipotekārā kredīta iegūšanas padomi</a></li>
+                        <li><a href="#">Kāpēc izvēlēties māju pilsētas nomalē</a></li>
+                        <li><a href="#">Enerģētiski efektīvu māju priekšrocības</a></li>
+                    </ul>
+                </aside>
+            </section>
+
+            <!-- Kartiņu sadaļa -->
+            <section class="cards-section" id="properties">
+                <h2>Aktuālie piedāvājumi</h2>
+                <div class="cards-container" id="cardsContainer">
+                    <!-- Kartiņas tiks ielādētas šeit -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modāls kartiņas izveidei/labošanai -->
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Izveidot jaunu kartiņu</h2>
+            <form id="cardForm">
+                <div class="form-group">
+                    <label for="cardTitle">Nosaukums:</label>
+                    <input type="text" id="cardTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardContent">Apraksts:</label>
+                    <textarea id="cardContent" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cardImage">Attēla URL (neobligāts):</label>
+                    <input type="text" id="cardImage">
+                </div>
+                <div class="form-actions">
+                    <button type="button" id="cancelBtn" class="card-button delete-btn">Atcelt</button>
+                    <button type="submit" id="saveBtn" class="card-button">Saglabāt</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Kājene -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2023 Māju Pārdošana. Visas tiesības aizsargātas.</p>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                </div>
+                <p>Kontakti: info@majupardosana.lv | +371 12345678</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM elementi
+        const cardsContainer = document.getElementById('cardsContainer');
+        const createCardBtn = document.getElementById('createCardBtn');
+        const cardModal = document.getElementById('cardModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const cardForm = document.getElementById('cardForm');
+        const cardTitle = document.getElementById('cardTitle');
+        const cardContent = document.getElementById('cardContent');
+        const cardImage = document.getElementById('cardImage');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const searchInput = document.getElementById('searchInput');
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Kartiņu dati
+        let cards = [];
+        let currentCardId = null;
+
+        // Notikumu pārlēkšanas funkcijas
+        createCardBtn.addEventListener('click', () => openModal());
+        cancelBtn.addEventListener('click', () => closeModal());
+        cardForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            saveCard();
+        });
+
+        // Meklēšanas funkcionalitāte
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            filterCards(searchTerm);
+        });
+
+        // Kontaktu formas validācija
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            validateAndSubmitForm();
+        });
+
+        // Funkcija modāla atvēršanai
+        function openModal(cardId = null) {
+            currentCardId = cardId;
+
+            if (cardId) {
+                // Labošanas režīms
+                modalTitle.textContent = 'Labot kartiņu';
+                const card = cards.find(c => c.id === cardId);
+                cardTitle.value = card.title;
+                cardContent.value = card.content;
+                cardImage.value = card.image || '';
+            } else {
+                // Izveides režīms
+                modalTitle.textContent = 'Izveidot jaunu kartiņu';
+                cardTitle.value = '';
+                cardContent.value = '';
+                cardImage.value = '';
+            }
+
+            cardModal.style.display = 'flex';
+        }
+
+        // Funkcija modāla aizvēršanai
+        function closeModal() {
+            cardModal.style.display = 'none';
+            currentCardId = null;
+        }
+
+        // Funkcija kartiņas saglabāšanai
+        function saveCard() {
+            const title = cardTitle.value.trim();
+            const content = cardContent.value.trim();
+            const image = cardImage.value.trim();
+
+            if (!title || !content) {
+                alert('Lūdzu aizpildiet visus obligātos laukus!');
+                return;
+            }
+
+            if (currentCardId) {
+                // Atjaunināt esošu kartiņu
+                const cardIndex = cards.findIndex(c => c.id === currentCardId);
+                cards[cardIndex] = {...cards[cardIndex],
+                    title,
+                    content,
+                    image
+                };
+            } else {
+                // Pievienot jaunu kartiņu
+                const newCard = {
+                    id: Date.now().toString(),
+                    title,
+                    content,
+                    image: image || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                    createdAt: new Date().toISOString()
+                };
+                cards.push(newCard);
+            }
+
+            // Saglabāt localStorage un atjaunināt displeju
+            saveToLocalStorage();
+            renderCards();
+            closeModal();
+        }
+
+        // Funkcija kartiņas dzēšanai
+        function deleteCard(cardId) {
+            if (confirm('Vai tiešām vēlaties dzēst šo kartiņu?')) {
+                cards = cards.filter(c => c.id !== cardId);
+                saveToLocalStorage();
+                renderCards();
+            }
+        }
+
+        // Funkcija kartiņu attēlošanai
+        function renderCards() {
+            if (cards.length === 0) {
+                cardsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Nav izveidotas nevienas kartiņas</h3>
+                        <p>Noklikšķiniet uz pogas "Izveidot jaunu kartiņu", lai sāktu</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cardsContainer.innerHTML = cards.map(card => `
+                <div class="card" data-title="${escapeHtml(card.title.toLowerCase())}" data-content="${escapeHtml(card.content.toLowerCase())}">
+                    <img src="${card.image}" alt="${escapeHtml(card.title)}" class="card-img">
+                    <div class="card-content">
+                        <h3>${escapeHtml(card.title)}</h3>
+                        <p>${escapeHtml(card.content)}</p>
+                        <div class="card-actions">
+                            <button class="card-button edit-btn" onclick="openModal('${card.id}')">Labot</button>
+                            <button class="card-button delete-btn" onclick="deleteCard('${card.id}')">Dzēst</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Funkcija kartiņu filtrēšanai
+        function filterCards(searchTerm) {
+            const allCards = document.querySelectorAll('.card');
+
+            if (searchTerm === '') {
+                // Rādīt visas kartiņas, ja meklēšanas lauks ir tukšs
+                allCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+                return;
+            }
+
+            allCards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                const content = card.getAttribute('data-content');
+
+                if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Funkcija formas validācijai un iesniegšanai
+        function validateAndSubmitForm() {
+            let isValid = true;
+
+            // Reset error states
+            resetFormErrors();
+
+            // Validate name
+            const name = document.getElementById('name').value.trim();
+            if (name === '') {
+                showError('nameGroup', 'nameError', 'Lūdzu ievadiet savu vārdu');
+                isValid = false;
+            }
+
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email === '') {
+                showError('emailGroup', 'emailError', 'Lūdzu ievadiet e-pasta adresi');
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                showError('emailGroup', 'emailError', 'Lūdzu ievadiet derīgu e-pasta adresi');
+                isValid = false;
+            }
+
+            // Validate message
+            const message = document.getElementById('message').value.trim();
+            if (message === '') {
+                showError('messageGroup', 'messageError', 'Lūdzu ievadiet ziņojumu');
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Form submission successful
+                successMessage.style.display = 'block';
+                contactForm.reset();
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Palīgfunkcija kļūdu rādīšanai
+        function showError(groupId, errorId, message) {
+            const group = document.getElementById(groupId);
+            const error = document.getElementById(errorId);
+
+            group.classList.add('error');
+            error.textContent = message;
+        }
+
+        // Palīgfunkcija formu kļūdu atiestatīšanai
+        function resetFormErrors() {
+            const errorGroups = ['nameGroup', 'emailGroup', 'messageGroup'];
+            errorGroups.forEach(groupId => {
+                document.getElementById(groupId).classList.remove('error');
+            });
+        }
+
+        // Funkcija datu saglabāšanai localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('propertyCards', JSON.stringify(cards));
+        }
+
+        // Funkcija datu ielādei no localStorage
+        function loadFromLocalStorage() {
+            const storedCards = localStorage.getItem('propertyCards');
+            if (storedCards) {
+                cards = JSON.parse(storedCards);
+            } else {
+                // Pievienot dažas noklusējuma kartiņas, ja localStorage ir tukšs
+                cards = [{
+                    id: '1',
+                    title: 'Mūsdienu māja pilsētas nomalē',
+                    content: 'Jauna, enerģētiski efektīva māja ar 4 guļamistabām, atvērtu plānojumu un lielu dārzu.',
+                    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                    createdAt: new Date().toISOString()
+                }, {
+                    id: '2',
+                    title: 'Klassiska koka māja mežā',
+                    content: 'Jauka koka māja klusā apkārtnē ar 3 guļamistabām, kamīnu un terasi ar skatu uz mežu.',
+                    image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                    createdAt: new Date().toISOString()
+                }, {
+                    id: '3',
+                    title: 'Ģimenes māja pilsētas centrā',
+                    content: 'Ērta ģimenes māja ar 5 guļamistabām, modernu virtuvi un dārza terasi. Ideāla lielai ģimenei.',
+                    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                    createdAt: new Date().toISOString()
+                }];
+                saveToLocalStorage();
+            }
+        }
+
+        // Palīgfunkcija HTML aizsardzībai
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Dark Mode funkcionalitāte
+        const themeToggle = document.getElementById('themeToggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Pārbauda sistēmas iestatījumu un saglabāto izvēli
+        if (localStorage.getItem('theme') === 'dark' ||
+            (localStorage.getItem('theme') === 'auto' && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Inicializācija
+        function init() {
+            loadFromLocalStorage();
+            renderCards();
+        }
+
+        // Sākt lietotni
+        init();
+    </script>
+</body>
+
+</html>
+
+<body></body>
+<!-- Navigācijas izvēlne -->
+<header>
+    <div class="container">
+        <div class="header-content">
+            <div class="logo">Māju Pārdošana</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Sākums</a></li>
+                    <li><a href="#about">Par mums</a></li>
+                    <li><a href="#properties">Māju piedāvājumi</a></li>
+                    <li><a href="#contact">Kontakti</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="themeToggle">🌙</button>
+        </div>
+    </div>
+</header>
+
+<!-- Galvenā satura sadaļa -->
+<main>
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Atrodiet savu sapņu māju</h1>
+            <p>Mēs palīdzam atrast ideālo māju jūsu ģimenei. Pārbaudiet mūsu aktuālos piedāvājumus!</p>
+            <button class="card-button" id="createCardBtn" style="margin-top: 1.5rem;">Izveidot jaunu kartiņu</button>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Meklēšanas sadaļa -->
+        <section class="search-section">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Meklēt mājas pēc nosaukuma vai apraksta...">
+            </div>
+        </section>
+
+        <!-- Kontaktu forma -->
+        <section class="contact-section" id="contact">
+            <h2>Sazināties ar mums</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="success-message" id="successMessage">
+                    Ziņojums veiksmīgi nosūtīts! Mēs ar jums sazināsimies drīz.
+                </div>
+
+                <div class="form-group" id="nameGroup">
+                    <label for="name">Vārds *</label>
+                    <input type="text" id="name" name="name">
+                    <div class="error-message" id="nameError">Lūdzu ievadiet savu vārdu</div>
+                </div>
+
+                <div class="form-group" id="emailGroup">
+                    <label for="email">E-pasts *</label>
+                    <input type="email" id="email" name="email">
+                    <div class="error-message" id="emailError">Lūdzu ievadiet derīgu e-pasta adresi</div>
+                </div>
+
+                <div class="form-group" id="messageGroup">
+                    <label for="message">Ziņojums *</label>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                    <div class="error-message" id="messageError">Lūdzu ievadiet ziņojumu</div>
+                </div>
+
+                <button type="submit" class="card-button">Nosūtīt ziņojumu</button>
+            </form>
+        </section>
+
+        <section class="content">
+            <div class="main-content">
+                <h2>Kāpēc izvēlēties mūsu pakalpojumus?</h2>
+                <p>Mēs esam vadošā nekustamo īpašumu aģentūra reģionā ar vairāk nekā 15 gadu pieredzi. Mūsu komanda palīdzēs jums atrast ideālo māju, kas atbilst jūsu vajadzībām un budžetam.</p>
+
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Mūsdienu māja">
+
+                <h2>Mūsu pakalpojumi</h2>
+                <p>Mēs piedāvājam pilnu pakalpojumu klāstu māju pārdošanai un iegādei, tostarp nekustamo īpašumu vērtēšanu, juridiskos pakalpojumus un finanšu konsultācijas.</p>
+            </div>
+
+            <aside>
+                <h3>Populāri raksti</h3>
+                <ul>
+                    <li><a href="#">Kā sagatavot māju pārdošanai</a></li>
+                    <li><a href="#">Top 5 kļūdas, ko izvairīties, pērkot māju</a></li>
+                    <li><a href="#">Hipotekārā kredīta iegūšanas padomi</a></li>
+                    <li><a href="#">Kāpēc izvēlēties māju pilsētas nomalē</a></li>
+                    <li><a href="#">Enerģētiski efektīvu māju priekšrocības</a></li>
+                </ul>
+            </aside>
+        </section>
+
+        <!-- Kartiņu sadaļa -->
+        <section class="cards-section" id="properties">
+            <h2>Aktuālie piedāvājumi</h2>
+            <div class="cards-container" id="cardsContainer">
+                <!-- Kartiņas tiks ielādētas šeit -->
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Modāls kartiņas izveidei/labošanai -->
+<div class="modal" id="cardModal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Izveidot jaunu kartiņu</h2>
+        <form id="cardForm">
+            <div class="form-group">
+                <label for="cardTitle">Nosaukums:</label>
+                <input type="text" id="cardTitle" required>
+            </div>
+            <div class="form-group">
+                <label for="cardContent">Apraksts:</label>
+                <textarea id="cardContent" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="cardImage">Attēla URL (neobligāts):</label>
+                <input type="text" id="cardImage">
+            </div>
+            <div class="form-actions">
+                <button type="button" id="cancelBtn" class="card-button delete-btn">Atcelt</button>
+                <button type="submit" id="saveBtn" class="card-button">Saglabāt</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Kājene -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <p>&copy; 2023 Māju Pārdošana. Visas tiesības aizsargātas.</p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+            <p>Kontakti: info@majupardosana.lv | +371 12345678</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // DOM elementi
+    const cardsContainer = document.getElementById('cardsContainer');
+    const createCardBtn = document.getElementById('createCardBtn');
+    const cardModal = document.getElementById('cardModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const cardForm = document.getElementById('cardForm');
+    const cardTitle = document.getElementById('cardTitle');
+    const cardContent = document.getElementById('cardContent');
+    const cardImage = document.getElementById('cardImage');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const saveBtn = document.getElementById('saveBtn');
+    const searchInput = document.getElementById('searchInput');
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('successMessage');
+
+    // Kartiņu dati
+    let cards = [];
+    let currentCardId = null;
+
+    // Notikumu pārlēkšanas funkcijas
+    createCardBtn.addEventListener('click', () => openModal());
+    cancelBtn.addEventListener('click', () => closeModal());
+    cardForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveCard();
+    });
+
+    // Meklēšanas funkcionalitāte
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase().trim();
+        filterCards(searchTerm);
+    });
+
+    // Kontaktu formas validācija
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        validateAndSubmitForm();
+    });
+
+    // Funkcija modāla atvēršanai
+    function openModal(cardId = null) {
+        currentCardId = cardId;
+
+        if (cardId) {
+            // Labošanas režīms
+            modalTitle.textContent = 'Labot kartiņu';
+            const card = cards.find(c => c.id === cardId);
+            cardTitle.value = card.title;
+            cardContent.value = card.content;
+            cardImage.value = card.image || '';
+        } else {
+            // Izveides režīms
+            modalTitle.textContent = 'Izveidot jaunu kartiņu';
+            cardTitle.value = '';
+            cardContent.value = '';
+            cardImage.value = '';
+        }
+
+        cardModal.style.display = 'flex';
+    }
+
+    // Funkcija modāla aizvēršanai
+    function closeModal() {
+        cardModal.style.display = 'none';
+        currentCardId = null;
+    }
+
+    // Funkcija kartiņas saglabāšanai
+    function saveCard() {
+        const title = cardTitle.value.trim();
+        const content = cardContent.value.trim();
+        const image = cardImage.value.trim();
+
+        if (!title || !content) {
+            alert('Lūdzu aizpildiet visus obligātos laukus!');
+            return;
+        }
+
+        if (currentCardId) {
+            // Atjaunināt esošu kartiņu
+            const cardIndex = cards.findIndex(c => c.id === currentCardId);
+            cards[cardIndex] = {...cards[cardIndex],
+                title,
+                content,
+                image
+            };
+        } else {
+            // Pievienot jaunu kartiņu
+            const newCard = {
+                id: Date.now().toString(),
+                title,
+                content,
+                image: image || 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                createdAt: new Date().toISOString()
+            };
+            cards.push(newCard);
+        }
+
+        // Saglabāt localStorage un atjaunināt displeju
+        saveToLocalStorage();
+        renderCards();
+        closeModal();
+    }
+
+    // Funkcija kartiņas dzēšanai
+    function deleteCard(cardId) {
+        if (confirm('Vai tiešām vēlaties dzēst šo kartiņu?')) {
+            cards = cards.filter(c => c.id !== cardId);
+            saveToLocalStorage();
+            renderCards();
+        }
+    }
+
+    // Funkcija kartiņu attēlošanai
+    function renderCards() {
+        if (cards.length === 0) {
+            cardsContainer.innerHTML = `
+                    <div class="empty-state">
+                        <h3>Nav izveidotas nevienas kartiņas</h3>
+                        <p>Noklikšķiniet uz pogas "Izveidot jaunu kartiņu", lai sāktu</p>
+                    </div>
+                `;
+            return;
+        }
+
+        cardsContainer.innerHTML = cards.map(card => `
+                <div class="card" data-title="${escapeHtml(card.title.toLowerCase())}" data-content="${escapeHtml(card.content.toLowerCase())}">
+                    <img src="${card.image}" alt="${escapeHtml(card.title)}" class="card-img">
+                    <div class="card-content">
+                        <h3>${escapeHtml(card.title)}</h3>
+                        <p>${escapeHtml(card.content)}</p>
+                        <div class="card-actions">
+                            <button class="card-button edit-btn" onclick="openModal('${card.id}')">Labot</button>
+                            <button class="card-button delete-btn" onclick="deleteCard('${card.id}')">Dzēst</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    // Funkcija kartiņu filtrēšanai
+    function filterCards(searchTerm) {
+        const allCards = document.querySelectorAll('.card');
+
+        if (searchTerm === '') {
+            // Rādīt visas kartiņas, ja meklēšanas lauks ir tukšs
+            allCards.forEach(card => {
+                card.classList.remove('hidden');
+            });
+            return;
+        }
+
+        allCards.forEach(card => {
+            const title = card.getAttribute('data-title');
+            const content = card.getAttribute('data-content');
+
+            if (title.includes(searchTerm) || content.includes(searchTerm)) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+    }
+
+    // Funkcija formas validācijai un iesniegšanai
+    function validateAndSubmitForm() {
+        let isValid = true;
+
+        // Reset error states
+        resetFormErrors();
+
+        // Validate name
+        const name = document.getElementById('name').value.trim();
+        if (name === '') {
+            showError('nameGroup', 'nameError', 'Lūdzu ievadiet savu vārdu');
+            isValid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (email === '') {
+            showError('emailGroup', 'emailError', 'Lūdzu ievadiet e-pasta adresi');
+            isValid = false;
+        } else if (!emailRegex.test(email)) {
+            showError('emailGroup', 'emailError', 'Lūdzu ievadiet derīgu e-pasta adresi');
+            isValid = false;
+        }
+
+        // Validate message
+        const message = document.getElementById('message').value.trim();
+        if (message === '') {
+            showError('messageGroup', 'messageError', 'Lūdzu ievadiet ziņojumu');
+            isValid = false;
+        }
+
+        if (isValid) {
+            // Form submission successful
+            successMessage.style.display = 'block';
+            contactForm.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    // Palīgfunkcija kļūdu rādīšanai
+    function showError(groupId, errorId, message) {
+        const group = document.getElementById(groupId);
+        const error = document.getElementById(errorId);
+
+        group.classList.add('error');
+        error.textContent = message;
+    }
+
+    // Palīgfunkcija formu kļūdu atiestatīšanai
+    function resetFormErrors() {
+        const errorGroups = ['nameGroup', 'emailGroup', 'messageGroup'];
+        errorGroups.forEach(groupId => {
+            document.getElementById(groupId).classList.remove('error');
+        });
+    }
+
+    // Funkcija datu saglabāšanai localStorage
+    function saveToLocalStorage() {
+        localStorage.setItem('propertyCards', JSON.stringify(cards));
+    }
+
+    // Funkcija datu ielādei no localStorage
+    function loadFromLocalStorage() {
+        const storedCards = localStorage.getItem('propertyCards');
+        if (storedCards) {
+            cards = JSON.parse(storedCards);
+        } else {
+            // Pievienot dažas noklusējuma kartiņas, ja localStorage ir tukšs
+            cards = [{
+                id: '1',
+                title: 'Mūsdienu māja pilsētas nomalē',
+                content: 'Jauna, enerģētiski efektīva māja ar 4 guļamistabām, atvērtu plānojumu un lielu dārzu.',
+                image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                createdAt: new Date().toISOString()
+            }, {
+                id: '2',
+                title: 'Klassiska koka māja mežā',
+                content: 'Jauka koka māja klusā apkārtnē ar 3 guļamistabām, kamīnu un terasi ar skatu uz mežu.',
+                image: 'https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                createdAt: new Date().toISOString()
+            }, {
+                id: '3',
+                title: 'Ģimenes māja pilsētas centrā',
+                content: 'Ērta ģimenes māja ar 5 guļamistabām, modernu virtuvi un dārza terasi. Ideāla lielai ģimenei.',
+                image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                createdAt: new Date().toISOString()
+            }];
+            saveToLocalStorage();
+        }
+    }
+
+    // Palīgfunkcija HTML aizsardzībai
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Dark Mode funkcionalitāte
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Pārbauda sistēmas iestatījumu un saglabāto izvēli
+    if (localStorage.getItem('theme') === 'dark' ||
+        (localStorage.getItem('theme') === 'auto' && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            themeToggle.textContent = '☀️';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            themeToggle.textContent = '🌙';
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // Inicializācija
+    function init() {
+        loadFromLocalStorage();
+        renderCards();
+    }
+
+    // Sākt lietotni
+    init();
+</script>
+</body>
+
+</html>
